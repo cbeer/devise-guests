@@ -16,6 +16,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
+  s.add_development_dependency "combustion"
+  s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "capybara"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
