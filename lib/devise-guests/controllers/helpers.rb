@@ -4,7 +4,7 @@ module DeviseGuests::Controllers
 
     included do
       include ActiveSupport::Callbacks
-      DeviseGuests::Controllers::Helpers.callbacks.each do |c|
+      (DeviseGuests::Controllers::Helpers.callbacks || []).each do |c|
         define_callbacks *c
       end
 
