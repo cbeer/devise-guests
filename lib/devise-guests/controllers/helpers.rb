@@ -48,7 +48,7 @@ module DeviseGuests::Controllers
 
         private
         def create_guest_#{mapping}
-          u = #{class_name}.create(:name => "guest", :email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+          u = #{class_name}.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
           u.save(:validate => false)
           u
         end
