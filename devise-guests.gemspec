@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors = ["Chris Beer"]
   s.email = %q{chris@cbeer.info}
   s.homepage = %q{http://github.com/cbeer/devise-guests}
-  s.summary = %q{ asdf }
-  s.description = %q{ asdfgh }
+  s.summary = %q{ Guest user implementation for devise }
+  s.description = %q{ Guest user implementation for devise }
 
   s.add_dependency 'devise'
 

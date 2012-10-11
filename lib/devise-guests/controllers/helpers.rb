@@ -28,6 +28,7 @@ module DeviseGuests::Controllers
       class_eval <<-METHODS, __FILE__, __LINE__ + 1
         define_concern_callbacks :logging_in_#{mapping}
 
+ 
         def guest_#{mapping}
           #{class_name}.find(session[:guest_#{mapping}_id].nil? ? session[:guest_#{mapping}_id] = create_guest_#{mapping}.id : session[:guest_#{mapping}_id])
         end
@@ -48,10 +49,20 @@ module DeviseGuests::Controllers
 
         private
         def create_guest_#{mapping}
-          u = #{class_name}.create(:email => "guest_#{Time.now.to_i}#{rand(99)}@example.com")
+          u = #{class_name}.create(:email => "guest_" + guest_#{mapping}_unique_suffix + "@example.com")
           u.save(:validate => false)
           u
         end
+
+        def guest_#{mapping}_unique_suffix
+          Devise.friendly_token + "_" + Time.now.to_i.to_s + "_" + unique_#{mapping}_counter.to_s
+        end
+
+        def unique_#{mapping}_counter
+          @@unique_#{mapping}_counter ||= 0
+          @@unique_#{mapping}_counter += 1
+        end
+
       METHODS
 
       ActiveSupport.on_load(:action_controller) do
