@@ -62,6 +62,7 @@ module DeviseGuests::Controllers
 
         private
         def create_guest_#{mapping} email = nil
+          email &&= nil unless email ~= /^guest/
           email ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
           u = #{class_name}.create(:email => email)
           u.password = u.password_confirmation = email
