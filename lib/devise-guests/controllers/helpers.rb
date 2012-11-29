@@ -30,7 +30,20 @@ module DeviseGuests::Controllers
 
  
         def guest_#{mapping}
-          #{class_name}.find(session[:guest_#{mapping}_id].nil? ? session[:guest_#{mapping}_id] = create_guest_#{mapping}.id : session[:guest_#{mapping}_id])
+          return @guest_#{mapping} if @guest_#{mapping}
+
+          if session[:guest_#{mapping}_id]
+            @guest_#{mapping} = #{class_name}.find_by_email(session[:guest_#{mapping}_id]) rescue nil
+            @guest_#{mapping} = nil if @guest_#{mapping}.respond_to? :guest and !@guest_#{mapping}.guest 
+          end
+
+          @guest_#{mapping} ||= begin
+            u = create_guest_#{mapping}(session[:guest_#{mapping}_id])
+            session[:guest_#{mapping}_id] = u.email
+            u
+          end
+
+          @guest_#{mapping}
         end
 
         def current_or_guest_#{mapping}
@@ -48,9 +61,11 @@ module DeviseGuests::Controllers
         end
 
         private
-        def create_guest_#{mapping}
-          u = #{class_name}.create(:email => "guest_" + guest_#{mapping}_unique_suffix + "@example.com")
-          u.save(:validate => false)
+        def create_guest_#{mapping} email = nil
+          email ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
+          u = #{class_name}.create(:email => email)
+          u.password = u.password_confirmation = email
+          u.guest = true if u.respond_to? :guest
           u
         end
 
