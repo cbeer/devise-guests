@@ -2,6 +2,7 @@
 
 A drop-in guest user implementation for devise
 
+(I'm using "user" to mean my devise model, but you should be able to use any model you want, just like devise)
 
 ## Installation
 
