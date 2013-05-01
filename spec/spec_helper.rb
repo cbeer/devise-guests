@@ -1,18 +1,18 @@
 require 'rubygems'
-require 'bundler'
-
-Bundler.require :default, :development
+require 'bundler/setup'
 
 if ENV['COVERAGE'] and RUBY_VERSION =~ /^1.9/
   require 'simplecov'
   SimpleCov.start
 end
 
+require 'combustion'
 require 'capybara/rspec'
 
-Combustion.initialize!
+require 'devise'
+require 'devise-guests'
+Combustion.initialize!(:active_record,:action_mailer)
 
 require 'rspec/rails'
 require 'capybara/rails'
 
-require 'devise-guests'
