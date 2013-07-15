@@ -64,7 +64,10 @@ module DeviseGuests::Controllers
         def create_guest_#{mapping} email = nil
           email &&= nil unless email.to_s.match(/^guest/)
           email ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
-          u = #{class_name}.create(:email => email)
+          u = #{class_name}.new.tap do |g|
+            g.email = email
+            g.save
+          end
           u.password = u.password_confirmation = email
           u.guest = true if u.respond_to? :guest
           u
