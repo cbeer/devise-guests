@@ -1,5 +1,5 @@
 # Devise Guests
-
+[![Build Status](https://travis-ci.org/cbeer/devise-guests.png?branch=master)](https://travis-ci.org/cbeer/devise-guests)
 A drop-in guest user implementation for devise
 
 (I'm using "user" to mean my devise model, but you should be able to use any model you want, just like devise)
