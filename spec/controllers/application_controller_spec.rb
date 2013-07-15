@@ -18,7 +18,7 @@ describe ApplicationController do
   end
 
   it "should use the current user when available" do
-    m = mock()
+    m = double()
     @mock_warden.stub(:authenticate).with(anything).and_return(m)
 
     @controller.current_or_guest_user.should == m
