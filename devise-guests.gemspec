@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/cbeer/devise-guests}
   s.summary = %q{ Guest user implementation for devise }
   s.description = %q{ Guest user implementation for devise }
+  s.license = "MIT"
 
   s.add_dependency 'devise'
 
