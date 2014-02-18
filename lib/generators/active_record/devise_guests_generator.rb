@@ -8,7 +8,7 @@ module ActiveRecord
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_devise_migration
-          migration_template "migration_existing.rb", "db/migrate/add_devise_guests_to_#{table_name}"
+          migration_template "migration_existing.rb", "db/migrate/add_devise_guests_to_#{table_name}.rb"
       end
 
       def migration_data
