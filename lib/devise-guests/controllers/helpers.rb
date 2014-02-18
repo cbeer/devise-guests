@@ -33,13 +33,13 @@ module DeviseGuests::Controllers
           return @guest_#{mapping} if @guest_#{mapping}
 
           if session[:guest_#{mapping}_id]
-            @guest_#{mapping} = #{class_name}.find_by_email(session[:guest_#{mapping}_id]) rescue nil
+            @guest_#{mapping} = #{class_name}.find_by(#{class_name}.authentication_keys.first => session[:guest_#{mapping}_id]) rescue nil
             @guest_#{mapping} = nil if @guest_#{mapping}.respond_to? :guest and !@guest_#{mapping}.guest 
           end
 
           @guest_#{mapping} ||= begin
             u = create_guest_#{mapping}(session[:guest_#{mapping}_id])
-            session[:guest_#{mapping}_id] = u.email
+            session[:guest_#{mapping}_id] = u.send(#{class_name}.authentication_keys.first)
             u
           end
 
@@ -61,16 +61,20 @@ module DeviseGuests::Controllers
         end
 
         private
-        def create_guest_#{mapping} email = nil
-          email &&= nil unless email.to_s.match(/^guest/)
-          email ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
+        def create_guest_#{mapping} key = nil
+          auth_key = #{class_name}.authentication_keys.first
           u = #{class_name}.new.tap do |g|
-            g.email = email
+            g.send("\#{auth_key}=", send(:"guest_\#{auth_key}_authentication_key", key))
             g.save
           end
-          u.password = u.password_confirmation = email
+          u.password = u.password_confirmation = Devise.friendly_token
           u.guest = true if u.respond_to? :guest
           u
+        end
+
+        def guest_email_authentication_key key
+          key &&= nil unless key.to_s.match(/^guest/)
+          key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
         end
 
         def guest_#{mapping}_unique_suffix
