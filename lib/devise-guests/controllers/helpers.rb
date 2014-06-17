@@ -63,7 +63,7 @@ module DeviseGuests::Controllers
         private
         def create_guest_#{mapping} key = nil
           auth_key = #{class_name}.authentication_keys.first
-          u = #{class_name}.new.tap do |g|
+          u = #{class_name}.new do |g|
             g.send("\#{auth_key}=", send(:"guest_\#{auth_key}_authentication_key", key))
             g.save
           end
