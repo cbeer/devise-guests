@@ -63,13 +63,12 @@ module DeviseGuests::Controllers
         private
         def create_guest_#{mapping} key = nil
           auth_key = #{class_name}.authentication_keys.first
-          u = #{class_name}.new.tap do |g|
+          #{class_name}.create do |g|
             g.send("\#{auth_key}=", send(:"guest_\#{auth_key}_authentication_key", key))
-            g.save
+            g.guest = true if g.respond_to? :guest
+            g.password = g.password_confirmation = Devise.friendly_token
+            g.skip_confirmation! if g.respond_to?(:skip_confirmation!)
           end
-          u.password = u.password_confirmation = Devise.friendly_token
-          u.guest = true if u.respond_to? :guest
-          u
         end
 
         def guest_email_authentication_key key
