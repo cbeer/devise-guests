@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ostruct'
 
-describe ApplicationController do
+describe ApplicationController, :type => :controller do
   controller do
 
   end
@@ -12,16 +12,16 @@ describe ApplicationController do
   end
 
   it "should create an anonymous user for a guest" do
-    @mock_warden.stub(:authenticate).with(anything).and_return(false)
+    allow(@mock_warden).to receive(:authenticate).with(anything).and_return(false)
 
-    @controller.current_or_guest_user.email.should =~ /guest/
+    expect(@controller.current_or_guest_user.email).to match(/guest/)
   end
 
   it "should use the current user when available" do
     m = double()
-    @mock_warden.stub(:authenticate).with(anything).and_return(m)
+    allow(@mock_warden).to receive(:authenticate).with(anything).and_return(m)
 
-    @controller.current_or_guest_user.should == m
+    expect(@controller.current_or_guest_user).to eq(m)
   end
 
 end

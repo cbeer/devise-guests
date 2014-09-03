@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Simple Integration" do
+describe "Simple Integration", :type => :request do
   it "should work" do
   end
 end

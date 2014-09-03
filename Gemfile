@@ -9,3 +9,5 @@ group :test do
   gem 'activerecord'
   gem 'actionmailer'
 end
+
+gem 'transpec'
