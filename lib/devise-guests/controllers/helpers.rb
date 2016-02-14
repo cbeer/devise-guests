@@ -73,7 +73,7 @@ module DeviseGuests::Controllers
 
         def guest_email_authentication_key key
           key &&= nil unless key.to_s.match(/^guest/)
-          key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
+          key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com".downcase
         end
 
         def guest_#{mapping}_unique_suffix
