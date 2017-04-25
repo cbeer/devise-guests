@@ -6,6 +6,7 @@
 /doc/
 /pkg/
 /spec/reports/
+/spec/internal/db/*.sqlite
 /tmp/
 *.bundle
 *.so
