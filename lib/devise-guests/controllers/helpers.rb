@@ -88,7 +88,9 @@ module DeviseGuests::Controllers
       METHODS
 
       ActiveSupport.on_load(:action_controller) do
-        helper_method "guest_#{mapping}", "current_or_guest_#{mapping}"
+        if respond_to?(:helper_method)
+          helper_method "guest_#{mapping}", "current_or_guest_#{mapping}"
+        end
       end
     end
   end
