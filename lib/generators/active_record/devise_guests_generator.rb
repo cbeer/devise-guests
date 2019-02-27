@@ -20,14 +20,13 @@ module ActiveRecord
 RUBY
       end
 
-      def rails5?
-        Rails.version.start_with? '5'
+      def rails4?
+        Rails.version.start_with? '4'
       end
 
       def migration_version
-        if rails5?
-          "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
-        end
+        return if rails4?
+        "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
       end
     end
   end
