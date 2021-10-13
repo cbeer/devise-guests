@@ -69,7 +69,7 @@ when creating a guest user, you can do so by overriding the set_guest_user_param
 
 ```ruby
 private
-def set_guest_user_params
+def guest_user_params
   { site_id: current_site.id }
 end
 ```

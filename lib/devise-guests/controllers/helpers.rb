@@ -65,7 +65,7 @@ module DeviseGuests::Controllers
           auth_key = #{class_name}.authentication_keys.first
           #{class_name}.new do |g|
             g.send("\#{auth_key}=", send(:"guest_\#{auth_key}_authentication_key", key))
-            g.assign_attributes(send(:"set_guest_#{mapping}_params"))
+            g.assign_attributes(send(:"guest_#{mapping}_params"))
             g.guest = true if g.respond_to? :guest
             g.skip_confirmation! if g.respond_to?(:skip_confirmation!)
             g.save(validate: false)
@@ -81,7 +81,7 @@ module DeviseGuests::Controllers
           Devise.friendly_token + "_" + Time.now.to_i.to_s + "_" + unique_#{mapping}_counter.to_s
         end
 
-        def set_guest_#{mapping}_params
+        def guest_#{mapping}_params
           {}
         end
 
