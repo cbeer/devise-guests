@@ -77,6 +77,10 @@ module DeviseGuests::Controllers
           key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
         end
 
+        def guest_#{mapping}_params
+          {}
+        end
+
         def guest_#{mapping}_unique_suffix
           SecureRandom.uuid
         end
