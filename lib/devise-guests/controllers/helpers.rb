@@ -50,7 +50,7 @@ module DeviseGuests::Controllers
           if current_#{mapping}
             if session[:guest_#{mapping}_id]
               run_callbacks :logging_in_#{mapping} do
-                guest_#{mapping}.destroy
+                guest_#{mapping}.destroy unless send(:"skip_destroy_guest_#{mapping}")
                 session[:guest_#{mapping}_id] = nil
               end
             end
@@ -78,6 +78,10 @@ module DeviseGuests::Controllers
 
         def guest_#{mapping}_unique_suffix
           SecureRandom.uuid
+        end
+
+        def skip_destroy_guest_#{mapping}
+          false
         end
 
       METHODS
