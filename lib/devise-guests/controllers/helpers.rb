@@ -65,6 +65,7 @@ module DeviseGuests::Controllers
           auth_key = #{class_name}.authentication_keys.first
           #{class_name}.new do |g|
             g.send("\#{auth_key}=", send(:"guest_\#{auth_key}_authentication_key", key))
+            g.assign_attributes(send(:"guest_#{mapping}_params"))
             g.guest = true if g.respond_to? :guest
             g.skip_confirmation! if g.respond_to?(:skip_confirmation!)
             g.save(validate: false)
@@ -74,6 +75,10 @@ module DeviseGuests::Controllers
         def guest_email_authentication_key key
           key &&= nil unless key.to_s.match(/^guest/)
           key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
+        end
+
+        def guest_#{mapping}_params
+          {}
         end
 
         def guest_#{mapping}_unique_suffix
