@@ -25,14 +25,14 @@ describe ApplicationController, type: :controller do
 
   it "should run the 'logging_in' callbacks" do
     # A user is logged in
-    current_user = double()
+    current_user = double
     allow(@controller).to receive(:current_user) { current_user }
 
     # There is a guest user instance
-    guest_user = double()
+    guest_user = double
     allow(guest_user).to receive(:destroy)
     allow(@controller).to receive(:guest_user) { guest_user }
-    allow(@controller).to receive(:session) { { guest_user_id: 123 } }
+    allow(@controller).to receive(:session) { {guest_user_id: 123} }
 
     expect(@controller).to receive(:run_callbacks).with(:logging_in_user).and_call_original
 
