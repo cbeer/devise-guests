@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Simplified required changes to handle transfer of data between guest and user records
+- Simplify guest transfer ([#38](https://github.com/cbeer/devise-guests/pull/38))
 
 ## [0.8.0] - 2021-10-25
 
