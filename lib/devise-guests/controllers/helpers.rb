@@ -5,15 +5,13 @@ module DeviseGuests::Controllers
     included do
       include ActiveSupport::Callbacks
       (DeviseGuests::Controllers::Helpers.callbacks || []).each do |c|
-        define_callbacks *c
+        define_callbacks(*c)
       end
-
     end
 
     mattr_reader :callbacks
 
     module ClassMethods
-
     end
 
     def self.define_concern_callbacks *args
@@ -21,7 +19,7 @@ module DeviseGuests::Controllers
       @@callbacks << args
     end
 
-    def self.define_helpers(mapping) #:nodoc:
+    def self.define_helpers(mapping) # :nodoc:
       class_name = mapping.class_name
       mapping = mapping.name
 

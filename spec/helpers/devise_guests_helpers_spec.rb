@@ -1,5 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe "devise guest helpers", :type => :helper do
-
+describe "devise guest helpers", type: :helper do
 end

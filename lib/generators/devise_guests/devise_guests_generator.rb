@@ -11,7 +11,6 @@ module DeviseGuests
       hook_for :orm
 
       def do_nothing
-
       end
     end
   end
