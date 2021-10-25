@@ -45,7 +45,6 @@ During the login process you may want to transfer things from your guest user to
 To do so, modify your ApplicationController like so:
 
 ```ruby
-define_callbacks :logging_in_user
 set_callback :logging_in_user, :before, :transfer_guest_to_current_user
 
 private
