@@ -34,7 +34,7 @@ current_user # (for logged in users)
 
 guest_user # ( for anonymous users)
 
-=> User<id: nil, email: guest_RANDOMENOUGHSTRING_@example.com, guest: true>
+=> User<id: 2, email: guest_RANDOMENOUGHSTRING_@example.com, guest: true>
 
 ```
 
