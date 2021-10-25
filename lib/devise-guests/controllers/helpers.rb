@@ -4,19 +4,9 @@ module DeviseGuests::Controllers
 
     included do
       include ActiveSupport::Callbacks
-      (DeviseGuests::Controllers::Helpers.callbacks || []).each do |c|
-        define_callbacks(*c)
-      end
     end
-
-    mattr_reader :callbacks
 
     module ClassMethods
-    end
-
-    def self.define_concern_callbacks *args
-      @@callbacks ||= []
-      @@callbacks << args
     end
 
     def self.define_helpers(mapping) # :nodoc:
@@ -24,9 +14,6 @@ module DeviseGuests::Controllers
       mapping = mapping.name
 
       class_eval <<-METHODS, __FILE__, __LINE__ + 1
-        define_concern_callbacks :logging_in_#{mapping}
-
-
         def guest_#{mapping}
           return @guest_#{mapping} if @guest_#{mapping}
 
@@ -93,6 +80,7 @@ module DeviseGuests::Controllers
         if respond_to?(:helper_method)
           helper_method "guest_#{mapping}", "current_or_guest_#{mapping}"
         end
+        define_callbacks "logging_in_#{mapping}"
       end
     end
   end
