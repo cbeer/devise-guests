@@ -42,13 +42,11 @@ guest_user # ( for anonymous users)
 ### Transferring Guest to User on Login
 
 During the login process you may want to transfer things from your guest user to the account the logged into.
-To do so, modify your ApplicationController like so:
+To do so, add the following method to your ApplicationController:
 
 ```ruby
-set_callback :logging_in_user, :transfer_guest_to_current_user
-
 private
-def transfer_guest_to_current_user
+def transfer_guest_to_user
   # At this point you have access to:
   #   * current_user - the user they've just logged in as
   #   * guest_user - the guest user they were previously identified by

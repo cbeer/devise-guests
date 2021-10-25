@@ -35,6 +35,7 @@ describe ApplicationController, type: :controller do
     allow(@controller).to receive(:session) { {guest_user_id: 123} }
 
     expect(@controller).to receive(:run_callbacks).with(:logging_in_user).and_call_original
+    expect(@controller).to receive(:transfer_guest_to_user).and_call_original
 
     @controller.current_or_guest_user
   end
