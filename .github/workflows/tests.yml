@@ -24,6 +24,7 @@ jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - id: read-version
         run: |
           echo "pwd:"
@@ -31,7 +32,6 @@ jobs:
           echo "ls:"
           ls
           echo "::set-output name=VERSION::`cat lib/devise-guests/version.rb | grep -i version | awk '{ print $3 }' | sed -e 's/\"//g'`"
-      - uses: actions/checkout@v2
       - uses: dangoslen/changelog-enforcer@v2.3.1
         with:
           skipLabels: 'skip-changelog'
