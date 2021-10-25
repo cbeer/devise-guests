@@ -1,4 +1,5 @@
 # Devise Guests
+[![Gem Version](https://badge.fury.io/rb/devise-guests.svg)](https://badge.fury.io/rb/devise-guests)
 [![Tests](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml/badge.svg)](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
 
