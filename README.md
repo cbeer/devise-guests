@@ -1,5 +1,5 @@
 # Devise Guests
-[![Build Status](https://travis-ci.org/cbeer/devise-guests.png?branch=master)](https://travis-ci.org/cbeer/devise-guests)
+[![Tests](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml/badge.svg)](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml)
 
 A drop-in guest user implementation for devise
 
