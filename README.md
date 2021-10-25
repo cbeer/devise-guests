@@ -76,6 +76,26 @@ def guest_user_params
 end
 ```
 
+### Non-standard authentication keys
+
+By default Devise will use `:email` as the authentication key for your model. If for some reason you have modified your
+Devise config to use an alternative attribute (such as `:phone_number`) you will need to provide a method to generate
+the value of this attribute for any guest users which are created.
+
+Sticking with the `:phone_number` example, you should define the following method in your `application_controller.rb`:
+
+```ruby
+private
+def guest_phone_number_authentication_key(key)
+  key &&= nil unless key.to_s.match(/^guest/)
+  key ||= "guest_447" + 9.times.map { SecureRandom.rand(0..9) }.join
+end
+```
+
+Validations are skipped when creating guest users, but if you need to rely on future modifications to the guest record
+passing validations, then you should ensure that this default value for guests is generated in such a way as to be
+valid.
+
 ### Prevent deletion of guest records
 
 By default, when signing in from a guest account to an authenticated account, the guest user is destroyed. You have an
