@@ -1,5 +1,6 @@
 # Devise Guests
 [![Tests](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml/badge.svg)](https://github.com/cbeer/devise-guests/actions/workflows/tests.yml)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
 
 A drop-in guest user implementation for devise
 
@@ -33,7 +34,7 @@ current_user # (for logged in users)
 
 guest_user # ( for anonymous users)
 
-=> User<id: nil, email: guest_RANDOMENOUGHSTRING_@example.com, guest: true>
+=> User<id: 2, email: guest_RANDOMENOUGHSTRING_@example.com, guest: true>
 
 ```
 

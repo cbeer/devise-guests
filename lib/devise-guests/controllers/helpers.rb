@@ -7,10 +7,9 @@ module DeviseGuests::Controllers
     end
 
     module ClassMethods
-
     end
 
-    def self.define_helpers(mapping) #:nodoc:
+    def self.define_helpers(mapping) # :nodoc:
       class_name = mapping.class_name
       mapping = mapping.name
 

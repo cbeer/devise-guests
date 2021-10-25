@@ -1,0 +1,2 @@
+ignore:
+  - "lib/generators/active_record/templates/migration_existing.rb"
