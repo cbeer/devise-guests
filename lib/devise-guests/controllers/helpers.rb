@@ -74,6 +74,9 @@ module DeviseGuests::Controllers
           false
         end
 
+        def transfer_guest_to_#{mapping}
+        end
+
       METHODS
 
       ActiveSupport.on_load(:action_controller) do
@@ -81,6 +84,7 @@ module DeviseGuests::Controllers
           helper_method "guest_#{mapping}", "current_or_guest_#{mapping}"
         end
         define_callbacks "logging_in_#{mapping}"
+        set_callback :"logging_in_#{mapping}", :"transfer_guest_to_#{mapping}"
       end
     end
   end
