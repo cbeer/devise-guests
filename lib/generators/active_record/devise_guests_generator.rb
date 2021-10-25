@@ -1,5 +1,5 @@
-require 'rails/generators/active_record'
-require 'generators/devise/orm_helpers'
+require "rails/generators/active_record"
+require "generators/devise/orm_helpers"
 
 module ActiveRecord
   module Generators
@@ -8,20 +8,20 @@ module ActiveRecord
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_devise_migration
-          migration_template "migration_existing.rb",
-                             "db/migrate/add_devise_guests_to_#{table_name}.rb",
-                             migration_version: migration_version
+        migration_template "migration_existing.rb",
+          "db/migrate/add_devise_guests_to_#{table_name}.rb",
+          migration_version: migration_version
       end
 
       def migration_data
-<<RUBY
+        <<RUBY
       ## Database authenticatable
       t.boolean :guest, :default => false
 RUBY
       end
 
       def rails4?
-        Rails.version.start_with? '4'
+        Rails.version.start_with? "4"
       end
 
       def migration_version

@@ -1,10 +1,10 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
 gemspec
 
-gem 'sqlite3'
+gem "sqlite3"
 
 group :test do
-  gem 'activerecord'
-  gem 'actionmailer'
+  gem "activerecord"
+  gem "actionmailer"
 end
