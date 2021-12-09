@@ -18,7 +18,7 @@ module DeviseGuests::Controllers
           return @guest_#{mapping} if @guest_#{mapping}
 
           if session[:guest_#{mapping}_id]
-            @guest_#{mapping} = #{class_name}.find_by(#{class_name}.authentication_keys.first => session[:guest_#{mapping}_id]) rescue nil
+            @guest_#{mapping} = #{class_name}.unscoped.find_by(#{class_name}.authentication_keys.first => session[:guest_#{mapping}_id]) rescue nil
             @guest_#{mapping} = nil if @guest_#{mapping}.respond_to? :guest and !@guest_#{mapping}.guest
           end
 
