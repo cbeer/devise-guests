@@ -6,6 +6,6 @@ namespace :devise_guests do
   desc "Removes entries in the users table for guest users that are older than the number of days given."
   task :delete_old_guest_users, [:days_old] => [:environment] do |t, args|
     args.with_defaults(days_old: 7)
-    User.where("guest = ? and updated_at < ?", true, Time.now - args[:days_old].to_i.days).each { |x| x.destroy }
+    User.unscoped.where("guest = ? and updated_at < ?", true, Time.now - args[:days_old].to_i.days).each { |x| x.destroy }
   end
 end
