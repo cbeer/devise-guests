@@ -1,3 +1,3 @@
 module DeviseGuests
-  VERSION = "0.8.2"
+  VERSION = "0.8.1"
 end
