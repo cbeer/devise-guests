@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Support for default scopes where guests are hidden ([#41](https://github.com/cbeer/devise-guests/pull/41))
 
+### Fixed
+- Prevent crashing processes due to loading all guest users in memory during delete_old_guest_users task ([#42](https://github.com/cbeer/devise-guests/pull/42))
+
 ## [0.8.1] - 2021-10-26
 ### Changed
 - Simplify guest transfer ([#38](https://github.com/cbeer/devise-guests/pull/38))
