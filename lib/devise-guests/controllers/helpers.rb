@@ -53,7 +53,9 @@ module DeviseGuests::Controllers
             g.assign_attributes(send(:"guest_#{mapping}_params"))
             g.guest = true if g.respond_to? :guest
             g.skip_confirmation! if g.respond_to?(:skip_confirmation!)
-            g.save(validate: false)
+            #{class_name}.with_advisory_lock(g.email) do
+              g.save(validate: false)
+            end
           end
         end
 

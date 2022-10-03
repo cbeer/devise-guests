@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.license = "MIT"
 
   s.add_dependency "devise"
+  s.add_dependency "with_advisory_lock", "~> 4.6"
 
   s.add_development_dependency "rspec", "~> 3.0"
   s.add_development_dependency "rake"
