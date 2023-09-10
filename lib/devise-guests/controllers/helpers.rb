@@ -35,7 +35,9 @@ module DeviseGuests::Controllers
           if current_#{mapping}
             if session[:guest_#{mapping}_id]
               run_callbacks :logging_in_#{mapping} do
-                guest_#{mapping}.destroy unless send(:"skip_destroy_guest_#{mapping}")
+                #{class_name}.with_advisory_lock(current_#{mapping}.email) do
+                  guest_#{mapping}.destroy unless send(:"skip_destroy_guest_#{mapping}")
+                end
                 session[:guest_#{mapping}_id] = nil
               end
             end
