@@ -31,7 +31,7 @@ current_or_guest_user
 current_user # (for logged in users)
 
 => User<id: 1, email: ...>
-# or 
+# or
 
 guest_user # ( for anonymous users)
 
@@ -50,9 +50,9 @@ def transfer_guest_to_user
   # At this point you have access to:
   #   * current_user - the user they've just logged in as
   #   * guest_user - the guest user they were previously identified by
-  # 
+  #
   # After this block runs, the guest_user will be destroyed!
-  
+
   if current_user.cart
     guest_user.cart.line_items.update_all(cart_id: current_user.cart.id)
   else
@@ -109,3 +109,13 @@ def skip_destroy_guest_user
   guest_user.orders.any?
 end
 ```
+
+### Customize Email Domain used for generate Guest User
+
+By default, the domain used for create a new User is @example.com but you can customize using .env and set your prefer
+domain with:
+
+```ruby
+ENV[DEVISE_GUEST_EMAIL_DOMAIN] = '@example.com'
+```
+

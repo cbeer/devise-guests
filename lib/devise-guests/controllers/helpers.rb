@@ -59,7 +59,8 @@ module DeviseGuests::Controllers
 
         def guest_email_authentication_key key
           key &&= nil unless key.to_s.match(/^guest/)
-          key ||= "guest_" + guest_#{mapping}_unique_suffix + "@example.com"
+          email_domain = ENV['DEVISE_GUEST_EMAIL_DOMAIN'] || "@example.com"
+          key ||= "guest_" + guest_#{mapping}_unique_suffix + email_domain
         end
 
         def guest_#{mapping}_params
