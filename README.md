@@ -41,7 +41,7 @@ guest_user # ( for anonymous users)
 
 ### Transferring Guest to User on Login
 
-During the login process you may want to transfer things from your guest user to the account the logged into.
+During the login process you may want to transfer things from your guest user to the account they logged into.
 To do so, add the following method to your ApplicationController:
 
 ```ruby
@@ -58,6 +58,10 @@ def transfer_guest_to_user
   else
     guest_user.cart.update!(user: current_user)
   end
+
+  # Note: you may want to call `guest_user.reload` at the end of this
+  # function to ensure any dependent hooks (destroy, nullify, etc)
+  # are not run from the guest_user's outdated associations
 end
 ```
 
