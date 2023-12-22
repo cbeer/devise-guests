@@ -59,9 +59,12 @@ def transfer_guest_to_user
     guest_user.cart.update!(user: current_user)
   end
 
-  # Note: you may want to call `guest_user.reload` at the end of this
-  # function to ensure any dependent hooks (destroy, nullify, etc)
-  # are not run from the guest_user's outdated associations
+  # In this example we've moved `LineItem` records from the guest
+  # user's cart to the logged-in user's cart.
+  #
+  # To prevent these being deleted when the guest user & cart are
+  # destroyed, we need to reload the guest record:
+  guest_user.reload
 end
 ```
 
