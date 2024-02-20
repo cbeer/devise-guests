@@ -8,6 +8,6 @@ namespace :devise_guests do
     args.with_defaults(days_old: 7, batch_size: 1000)
     User
       .where("guest = ? and updated_at < ?", true, Time.now - args[:days_old].to_i.days)
-      .find_each(batch_size: batch_size, &:destroy)
+      .find_each(batch_size: args[:batch_size], &:destroy)
   end
 end
