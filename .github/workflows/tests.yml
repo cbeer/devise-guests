@@ -28,7 +28,7 @@ jobs:
       - id: read-version
         run: |
           echo "::set-output name=VERSION::`cat lib/devise-guests/version.rb | grep -i version | awk '{ print $3 }' | sed -e 's/\"//g'`"
-      - uses: dangoslen/changelog-enforcer@v2.3.1
+      - uses: dangoslen/changelog-enforcer@v3
         with:
           skipLabels: 'skip-changelog'
           expectedLatestVersion: ${{ steps.read-version.outputs.VERSION }}
@@ -36,9 +36,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+      - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3'
           bundler-cache: true
           cache-version: 1
       - run: bundle exec standardrb
@@ -49,15 +49,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: ['2.7', '3.0', '3.1', '3.2']
+        ruby: ['3.0', '3.1', '3.2', '3.3']
 
     steps:
     - uses: actions/checkout@v4
     - name: Set up Ruby
-    # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
-    # change this to (see https://github.com/ruby/setup-ruby#versioning):
-    # uses: ruby/setup-ruby@v1
-      uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+      uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
