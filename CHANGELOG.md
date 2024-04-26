@@ -4,10 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.3] - 2024-04-26
+- Fix issue with passing batch_size to delete_old_guest_users task ([#52](https://github.com/cbeer/devise-guests/pull/52)) by [@whereismyjetpack](https://github.com/whereismyjetpack)
+
 ## [0.8.2] - 2023-12-24
 ### Fixed
 - Prevent crashing processes due to loading all guest users in memory during delete_old_guest_users task ([#42](https://github.com/cbeer/devise-guests/pull/42)) by [@hackartisan](https://github.com/hackartisan)
-- Fix issue with passing batch_size to delete_old_guest_users task ([#52](https://github.com/cbeer/devise-guests/pull/52)) by [@whereismyjetpack](https://github.com/whereismyjetpack)
 
 ### Changed
 - Update README with better detail around data migration ([#49](https://github.com/cbeer/devise-guests/pull/49)) by [@joshmenden](https://github.com/joshmenden)
